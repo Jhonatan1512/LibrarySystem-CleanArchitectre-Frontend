@@ -1,5 +1,4 @@
 :host {
-  /* Redefinimos variables locales por si Angular aísla los estilos */
   --bg-dark: #1e1e24;
   --card-bg: #23252b;
   --accent-mint: #34d399;

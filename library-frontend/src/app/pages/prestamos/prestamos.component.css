@@ -123,7 +123,7 @@
 }
 
 .btn-clear:hover {
-  border-color: #ef4444; /* Rojo suave */
+  border-color: #ef4444; 
   color: #ef4444;
   background-color: rgba(239, 68, 68, 0.05);
 }
@@ -136,7 +136,7 @@
 }
 
 .btn-action {
-  background-color: #6366f1; /* Indigo vibrante */
+  background-color: #6366f1; 
   color: white;
   border: none;
   padding: 12px 24px;
@@ -161,12 +161,11 @@
   font-weight: bold;
 }
 
-/* Diseño mejorado de la tarjeta de resultados */
 .reader-name {
   margin: 0 0 8px 0;
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--accent-mint); /* Resalta el nombre en color menta */
+  color: var(--accent-mint); 
 }
 
 .books-container {
@@ -300,7 +299,7 @@
   border-radius: 10px;
   outline: none;
   width: 100%;
-  box-sizing: border-box; /* Asegura que no se desborde */
+  box-sizing: border-box; 
 }
 
 .form-group input:focus { border-color: var(--accent-mint); }
@@ -408,22 +407,21 @@
   background-color: var(--accent-mint);
   color: #18181c;
 }
-/* Estilos para los estados "Full Color" */
 .status-badge {
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 0.75rem;
   font-weight: bold;
-  color: white !important; /* Texto siempre blanco */
+  color: white !important;
   display: inline-block;
   margin: 10px; 
   margin-bottom: 8px; 
   text-transform: uppercase;
 }
 
-.status-success { background-color: #28a745; } /* Verde */
-.status-warning { background-color: #f39c12; } /* Naranja/Amarillo */
-.status-danger { background-color: #e74c3c; }  /* Rojo */
+.status-success { background-color: #28a745; } 
+.status-warning { background-color: #f39c12; }
+.status-danger { background-color: #e74c3c; }  
 
 /* Botón de Entrega */
 .btn-deliver {

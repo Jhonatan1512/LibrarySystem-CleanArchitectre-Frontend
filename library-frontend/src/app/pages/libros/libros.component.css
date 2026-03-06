@@ -32,7 +32,7 @@
   box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
 }
 
-/* Buscador Estilo Imagen Referencia */
+
 .input-icon-group {
   display: flex;
   flex-direction: column;
@@ -227,7 +227,7 @@
   padding: 12px 15px;
   border-radius: 12px;
   color: white;
-  appearance: none; /* Quita la flecha nativa */
+  appearance: none;
   outline: none;
   cursor: pointer;
 }

@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 })
 export class AlertService {
 
-  // Configuración base para todos los Toasts
   private Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -52,7 +51,7 @@ export class AlertService {
     });
   }
 
-  // Bonus: Una alerta de confirmación (no es toast, pero es útil)
+  //alerta de confirmación (no es toast, pero es útil)
   async confirm(title: string, text: string): Promise<boolean> {
     const result = await Swal.fire({
       title: title,
