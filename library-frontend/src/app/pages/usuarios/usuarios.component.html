@@ -1,0 +1,107 @@
+<div class="usuarios-page">
+  
+  <header class="header-section">
+    <div class="title-group">
+      
+      <h1>Lectores Registrados</h1>
+      <p>Administración de identidades y acceso a biblioteca.</p>
+    </div>
+    <button class="btn-new-user" (click)="abrirModal()">
+      <i class="bi bi-person-plus-fill"></i> Nuevo Lector
+    </button>
+  </header>
+
+  <section class="main-card">
+    <div class="search-bar">
+      <div class="input-icon-group">
+        <i class="bi bi-search"></i>
+        <input type="text" [(ngModel)]="nuevoDni" placeholder="Filtrar por nombre o documento..." (keyup.enter)="buscarUsuario()">
+        
+        @if(nuevoDni){
+          <button class="btn-clean-link" (click)="limpiarBusqueda()">
+              Limpiar búsqueda
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>Lector</th>
+            <th>DNI</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (u of usuarios; track u.id){
+            <tr>
+            <td>
+              <div class="user-info">
+                <div class="avatar">{{ u.nombre.charAt(0) }}</div>
+                <div class="name-box">
+                  <span class="full-name">{{ u.nombre }}</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="dni-tag">{{ u.dni }}</span>
+            </td>
+            <td>
+              <div class="action-btns">
+                <button class="btn-edit" (click)="editarUsuario(u)"><i class="bi bi-pencil-square">✏️</i></button>
+                <button class="btn-delete" (click)="eliminarUsuario(u.id)"><i class="bi bi-trash3">🗑️</i></button>
+              </div>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<!--Modal de Registro-->
+
+@if (isModalOpen) {
+  <div class="modal-overlay">
+    <div class="modal-content-premium">
+      
+      <div class="modal-header">
+        <div class="header-icon">
+          <i [class]="isEditing ? 'bi bi-person-plus' : 'bi bi-person-plus'"></i>
+        </div>
+        <div>
+          <h2>{{ isEditing ? 'Editar Lector' : 'Registrar Nuevo Lector'}}</h2>
+          <p>{{ isEditing ? 'Modificar los datos del registro' : 'Completa la información básica del usuario'}}</p>
+        </div>
+        <button class="btn-close-x" (click)="cerrarModal()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="input-group">
+          <label>Nombre Completo</label>
+          <div class="input-with-icon">
+            <i class="bi bi-person"></i>
+            <input type="text" [(ngModel)]="usuarioSeleccionado.nombre" placeholder="Ej. Carlos Alberto Ruíz">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Documento de Identidad (DNI)</label>
+          <div class="input-with-icon">
+            <i class="bi bi-card-text"></i>
+            <input type="text" [(ngModel)]="usuarioSeleccionado.dni" placeholder="Ej. 12345678">
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-cancel" (click)="cerrarModal()">Cancelar</button>
+        <button class="btn-save-confirm" (click)="guardarUsuario()">{{ isEditing ? 'Actualizar datos' : 'Guardar Registro'}}</button>
+      </div>
+
+    </div>
+  </div>
+}

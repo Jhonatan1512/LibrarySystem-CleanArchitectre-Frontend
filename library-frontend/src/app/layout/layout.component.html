@@ -1,0 +1,21 @@
+<div class="dark-dashboard">
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">📚</div>
+      <h2>BiblioSys</h2>
+    </div>
+    <nav class="nav-menu">
+      <ul>
+        <li routerLink="/home" routerLinkActive="active"><span class="icon">📊</span> Home</li>
+        <li routerLink="/prestamos" routerLinkActive="active"><span class="icon">📄</span> Préstamos</li>
+        <li routerLink="/usuarios" routerLinkActive="active"><span class="icon">👥</span> Lectores</li>
+        <li routerLink="/libros" routerLinkActive="active"><span class="icon">📚</span> Libros</li>
+        <li><span class="icon">⚙️</span> Settings</li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

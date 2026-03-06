@@ -1,0 +1,71 @@
+<div class="home-container">
+  
+  <header class="page-header">
+    <h1>Dashboard General</h1>
+    <p>Resumen de la actividad de la biblioteca en tiempo real.</p>
+  </header>
+
+  @if (!loading) {
+    <div class="stats-grid">
+      <div class="card stat-card">
+        <div class="stat-icon icon-blue">📚</div>
+        <div class="stat-details">
+          <h3>Total de Libros</h3>
+          <h2>{{ stats.totalLibros | number }}</h2>
+        </div> 
+      </div> 
+      
+      <div class="card stat-card">
+        <div class="stat-icon icon-mint">🔄</div>
+        <div class="stat-details">
+          <h3>Préstamos Activos</h3>
+          <h2 class="mint-text">{{ stats.prestamosActivos | number }}</h2>
+        </div>
+      </div>
+
+      <div class="card stat-card">
+        <div class="stat-icon icon-purple">👥</div>
+        <div class="stat-details">
+          <h3>Lectores Registrados</h3>
+          <h2>{{ stats.lectoresRegistrados | number }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="charts-section">
+      <div class="card chart-card">
+        <div class="card-header">
+          <h3>Libros más prestados por Categoría</h3>
+          <span class="dropdown">Histórico 🔽</span>
+        </div>
+        
+        <div class="bar-chart">
+          @for (item of stats.categoriasMasPrestadas; track item.nombre) {
+            <div class="bar-group">
+              <div class="tooltip">{{ item.total }} 📖</div>
+              
+              <div class="bar" 
+                   [class.active-bar]="item.porcentaje === 100"
+                   [style.height.%]="item.porcentaje">
+
+                   @if (item.porcentaje > 10) {
+                      <span class="bar-percentage">{{ item.porcentaje | number: '1.0-2' }}%</span>
+                    }
+              </div>
+              
+              <span [class.mint-text]="item.porcentaje === 100" 
+                    [class.font-bold]="item.porcentaje === 100">
+                {{ item.nombre }}
+              </span>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="loading-overlay">
+      <p>Cargando estadísticas...</p>
+    </div>
+  }
+
+</div>

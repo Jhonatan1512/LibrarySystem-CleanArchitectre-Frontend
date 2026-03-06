@@ -1,0 +1,150 @@
+<div class="libros-page">
+  <header class="header-section">
+    <div class="title-group">
+      <h1>Catálogo de Libros</h1>
+      <p>Gestión de títulos, autores y existencias.</p>
+    </div>
+    <button class="btn-new-book" (click)="abrirModal()">
+      <i class="bi bi-journal-plus"></i> Nuevo Libro
+    </button>
+  </header>
+
+  <div class="search-bar">
+    <div class="input-icon-group">
+      <i class="bi bi-search"></i>
+      <input type="text" placeholder="Buscar por título..." [(ngModel)]="nuevotitulo" (keyup.enter)="buscarLibro()"/>
+
+      @if(nuevotitulo){
+        <button class="btn-clean-link" (click)="limpiarBusqueda()">Limpiar búsqueda y ver todos</button>
+      }
+    </div>
+  </div>
+
+  <section class="main-card">
+    <div class="table-container">
+      <table class="book-table">
+        <thead>
+          <tr>
+            <th>Título y Autor</th>
+            <th>Categoría</th>
+            <th>Stock</th>
+            <th>Estado</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (l of libros; track l.id) {
+            <tr>
+              <td>
+                <div class="book-info">
+                  <div class="book-cover">
+                    <i class="bi bi-book-half"></i>
+                  </div>
+                  <div class="book-text">
+                    <span class="title">{{ l.titulo }}</span>
+                    <small class="author">{{ l.autor }}</small>
+                  </div>
+                </div>
+              </td>
+              <td>{{ l.nombreCategoria }}</td>
+              <td>
+                <span class="stock-num">{{ l.stock }}</span>
+              </td>
+              <td>
+                @if(l.stock > 0) {
+                    <span class="status-badge disponible">Disponible</span>
+                }@else {
+                    <span class="status-badge agotado">Sin Stock</span>
+                }
+                </td>
+              <td>
+                <div class="action-btns">
+                  <button class="btn-edit" (click)="modificarLibro(l)">
+                    <i class="bi bi-pencil"></i>✏️
+                  </button>
+                  <button class="btn-delete" (click)="eliminarLibro(l.id)">
+                    <i class="bi bi-trash3"></i>🗑️
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!--Modal de registro-->
+
+  @if (isModalOpen) {
+    <div class="modal-overlay">
+      <div class="modal-content-premium">
+        <div class="modal-header">
+          <div class="header-icon"><i class="bi bi-book"></i></div>
+          <h2>{{ isEditing ? 'Editar Libro': 'Registrar Nuevo Libro'}}</h2>
+          <button class="btn-close-x" (click)="cerrarModal()">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="input-row full-width-row">
+            <div class="input-group">
+              <label>Título del Libro</label>
+              <input
+                type="text"
+                placeholder="Ej. El Principito"
+                [(ngModel)]="libroSeleccionado.titulo"
+              />
+            </div>
+          </div>
+
+          <div class="input-row full-width-row">
+            <div class="input-group">
+              <label>Autor</label>
+              <input
+                type="text"
+                placeholder="Ej. Antoine de Saint-Exupéry"
+                [(ngModel)]="libroSeleccionado.autor"
+              />
+            </div>
+          </div>
+
+          <div class="input-row full-width-row">
+            <div class="input-group">
+              <label>Categoría</label>
+              <div class="select-wrapper">
+                <select
+                  class="custom-select"
+                  [(ngModel)]="libroSeleccionado.categoriaId"
+                >
+                  <option value="" disabled selected>
+                    Selecciona una categoría
+                  </option>
+                  @for (c of categorias; track c.id) {
+                    <option [value]="c.id">{{ c.nombre }}</option>
+                  }
+                </select>
+                <i class="bi bi-chevron-down"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-row full-width-row">
+            <div class="input-group">
+              <label>Stock Inicial</label>
+              <input
+                type="number"
+                placeholder="0"
+                [(ngModel)]="libroSeleccionado.stock"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn-cancel" (click)="cerrarModal()">Cancelar</button>
+          <button class="btn-save" (click)="guadarLibro()">Guardar Libro</button>
+        </div>
+      </div>
+    </div>
+  }
+</div>
